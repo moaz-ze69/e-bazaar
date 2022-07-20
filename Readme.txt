@@ -15,7 +15,7 @@ Group Members:
 Here are two folders, "With Backend Connected" and "Without Backend Connected"
 
 Both folders are having same project upto different working points. If you want
-to run any of them, jsut follow instructions given in "Readme.txt" file in that folder.
+to run any of them, just follow instructions given in "Readme.txt" file in that folder.
 
      Here is some little explaination on both projects
 
