@@ -1,0 +1,1 @@
+https://expo.dev/@moaz_ze69/Airlift?serviceType=classic&distribution=expo-go

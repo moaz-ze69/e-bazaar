@@ -1,0 +1,26 @@
+{
+  "kind": "collectionType",
+  "collectionName": "item_categories",
+  "info": {
+    "singularName": "item-category",
+    "pluralName": "item-categories",
+    "displayName": "Item Category",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "sub_category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::sub-category.sub-category"
+    }
+  }
+}

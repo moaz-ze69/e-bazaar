@@ -1,0 +1,246 @@
+CREATE TABLE mainCategory (
+	main_cat_id int PRIMARY KEY,
+	main_cat_name VARCHAR ( 255 ) UNIQUE NOT NULL,
+	main_cat_image_link VARCHAR ( 255 ) NOT NULL
+)
+
+CREATE TABLE generalCategory (
+	main_cat_id int,
+	general_cat_id int,
+	general_cat_name VARCHAR ( 255 ) NOT NULL,
+	FOREIGN KEY (main_cat_id) REFERENCES mainCategory(main_cat_id),
+	PRIMARY KEY(main_cat_id, general_cat_id)
+)
+
+CREATE TABLE subCategory (
+	main_cat_id int,
+	general_cat_id int,
+	sub_cat_id int,
+	sub_cat_name VARCHAR ( 255 ) NOT NULL,
+	sub_cat_image_link VARCHAR ( 255 ),
+	FOREIGN KEY (main_cat_id, general_cat_id ) REFERENCES generalCategory(main_cat_id, general_cat_id),
+	PRIMARY KEY(main_cat_id, general_cat_id, sub_cat_id)
+)
+
+CREATE TABLE itemCategory (
+	main_cat_id int,
+	general_cat_id int,
+	sub_cat_id int,
+	item_cat_id int,
+	item_cat_name VARCHAR ( 255 ) NOT NULL,
+	FOREIGN KEY (main_cat_id, general_cat_id, sub_cat_id ) REFERENCES subCategory(main_cat_id, general_cat_id, sub_cat_id),
+	PRIMARY KEY(main_cat_id, general_cat_id, sub_cat_id, item_cat_id)
+)
+
+CREATE TABLE products (
+	main_cat_id int,
+	general_cat_id int,
+	sub_cat_id int,
+	item_cat_id int,
+	product_id int,
+	product_title VARCHAR ( 255 ) NOT NULL,
+	product_img_src VARCHAR ( 255 ),
+	product_price int NOT NULL,
+	product_size VARCHAR (255),
+	product_stock int NOT NULL,
+	product_description VARCHAR (255),
+	FOREIGN KEY (main_cat_id, general_cat_id, sub_cat_id, item_cat_id) REFERENCES itemCategory(main_cat_id, general_cat_id, sub_cat_id, item_cat_id),
+	PRIMARY KEY(main_cat_id, general_cat_id, sub_cat_id, item_cat_id, product_id)
+)
+
+COPY mainCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\mainCategories.csv' DELIMITER ',' CSV HEADER
+select * from mainCategory
+
+COPY generalCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\generalCategories.csv' DELIMITER ',' CSV HEADER
+COPY generalCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\generalCategories.csv' DELIMITER ',' CSV HEADER
+COPY generalCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\generalCategories.csv' DELIMITER ',' CSV HEADER
+select * from generalCategory
+
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Fruits and Vegetables\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Beverages\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Snack & Chocolates\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Dairy & Eggs\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Meat\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Breakfast & Bakery\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cosmetics\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Auto Accessories\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Sports & Games\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Household Supplies\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Mother & Baby\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Baking\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Frozen\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Stationary & Gifts\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Organic\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Pet Care\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Party Supplies\subCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Budget Pharma\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Medicines\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\LifeStyle & Fitness\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Healthcare Devices\subCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Promotions\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Laptops & Tablets\subCategories.csv' DELIMITER ',' CSV HEADER;
+COPY subCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Mobile Phones\subCategories.csv' DELIMITER ',' CSV HEADER;
+
+select * from subCategory
+
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\Walls\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\Unilever\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\Reckitt\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\PepsiCo\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\National Foods\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\Kurkure\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\LU CBL\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\WBM\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Promotions\Shield\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Fruits and Vegetables\AirLift Fresh\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Fruits and Vegetables\Fruits\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Fruits and Vegetables\Vegetables\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Beverages\Tea & Coffee\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Beverages\Juices & Drinks\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Beverages\Water\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Beverages\Soft Drinks\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Snack & Chocolates\Biscuits & Wafers\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Snack & Chocolates\Chocolates & Sweets\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Snack & Chocolates\Crisps & Snacks\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Snack & Chocolates\SugarFree\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Dairy & Eggs\Butter & Margarine\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Dairy & Eggs\Cheese & Cream\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Dairy & Eggs\Eggs\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Dairy & Eggs\Fresh Dairy\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Dairy & Eggs\Milk & Tea Whitener\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Dairy & Eggs\Yogurt\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\Canned & BottledGoods\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\Noodles & Pasta\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\Oil & Ghee\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\Pickles & Chutneys\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\Rice, Pulses & Flour\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\Sauces & Seasonings\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cooking Essentials\Spices, Salt & Sugar\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Meat\Fresh Meat\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Meat\Frozen Meat\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Breakfast & Bakery\Bread\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Breakfast & Bakery\Cereals\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Breakfast & Bakery\Jams, Honey & Spreads\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cosmetics\Eyes\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cosmetics\Face\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Cosmetics\Lips\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Auto Accessories\Auto Accessories\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Sports & Games\Board & Card Games\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Sports & Games\Sports & Accessories\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Bath & Soap\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Feminine Care\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Hair Care\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Mens Care\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Oral Care\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\OTC Medicines\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Personal Care\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Sexual Wellness\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Health & Beauty\Skin Care\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Household Supplies\Cleaning Supplies\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Household Supplies\DishWashing\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Household Supplies\Household Essentials\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Household Supplies\Laundary\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Household Supplies\Pest Control\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Mother & Baby\Baby Skin & Hair Care\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Mother & Baby\BabyMotherFoods\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Mother & Baby\Bottle and Accessories\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Mother & Baby\Diapers & Wipes\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Batteries & Chargers\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Bulbs & Lights\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Drives, Storage Media\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Extension\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Laptop Accessories\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Mobile Accessories\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Network Components\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Gadgets & Accessories\Smartwatches & Bands\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Baking\Baking & Deserts\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Baking\Baking Supplies\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Frozen\Fruits & Vegetables\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Frozen\Ice Cream\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Frozen\Ready to Cook\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Stationary & Gifts\Art & Crafts\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Stationary & Gifts\Office & School\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Stationary & Gifts\Stationary\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Organic\DryFruit Nut & Seed\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Organic\Grain & Flours\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Pet Care\Acessories\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Pet Care\Pet Grooming\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Pet Care\PetFood & Treats\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Party Supplies\Disposables\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Grocery\Party Supplies\Party Supplies\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+-- -- ------------------------------------------ -- --
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Budget Pharma\Upto 40% off\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Medicines\OTC Meds and Fist Aid\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Medicines\Prescription Medicine\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\LifeStyle & Fitness\Sports Supplement\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\LifeStyle & Fitness\Vitamen and Supplements\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Healthcare Devices\Covid19\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Pharmacy\Healthcare Devices\Health Equipments\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+-- -- ------------------------------------------ -- --
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Promotions\Electronics\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Laptops & Tablets\Gaming\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Laptops & Tablets\Laptops\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Laptops & Tablets\Tablets\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Mobile Phones\Earphones\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Mobile Phones\MobilePhones\itemCategories.csv' DELIMITER ',' CSV HEADER;
+COPY itemCategory FROM 'D:\Study Material\Semester 5\Mobile Application Development\Semester Project\Airlift\web_scrapped_data\Electronics\Mobile Phones\Smartwatches\itemCategories.csv' DELIMITER ',' CSV HEADER;
+
+select * from itemCategory
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

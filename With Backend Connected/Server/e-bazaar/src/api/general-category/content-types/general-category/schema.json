@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "general_categories",
+  "info": {
+    "singularName": "general-category",
+    "pluralName": "general-categories",
+    "displayName": "General Category"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "department": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::department.department"
+    }
+  }
+}
