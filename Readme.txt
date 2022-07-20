@@ -21,7 +21,7 @@ to run any of them, just follow instructions given in "Readme.txt" file in that 
 
 o Without Backend Connected
 
-  In this project, application is working perfectly file. No backend is connected.
+  In this project, application is working perfectly fine. No backend is connected.
   All data is loaded locally on run time. Not a perferrable approach but this was done for testing
   purposes of the application.
 
