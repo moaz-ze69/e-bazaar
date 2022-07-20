@@ -20,5 +20,7 @@ If you want to run the application on your own locally, please read the followin
 3. Run command: expo start  --or--  npm start  --or--  yarn start
 4. Then, scan QR code from your ExpoGo App on android or camera from iOS
 
+APK file is available at
+https://drive.google.com/file/d/1LGMEC8duSD1LNpoKIMqTJJWJYGB66e3G/view?usp=sharing
 
 =========== ==================================== ===========
